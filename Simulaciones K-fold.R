@@ -4,6 +4,9 @@ library(mgcv)
 library(SOP)
 library(expm)
 
+# ALL SIMULATED DATA AND RESULTS ARE FOUND IN https://drive.google.com/file/d/1P_VlMo4agsdR7MhE9p1THNcSKEqiqvpR/view?usp=sharing 
+# AND ARE READY PLOT
+
 ########### Here we generate the data and set some fixed parameters
 
 N=100 # NUMBER OF SUBJECTS
@@ -166,7 +169,7 @@ for (iter_out in 1:case) { # HERE WE CAN SELECTED WHICH SCENARIO(S) SIMULATE
     y_train=y[-test]
     
  
-    ############## HERE ENDS THE GENERATION OF THE DATA  
+    ############## HERE ENDS THE GENERATION OF THE DATA 
     
     ############ HERE BEGINS THE ESTIMATION OF THE MODEL
     
@@ -182,8 +185,8 @@ for (iter_out in 1:case) { # HERE WE CAN SELECTED WHICH SCENARIO(S) SIMULATE
     
     # ADAPTIVE
     # BB_ad=Data2B_simpson_ad(X_train, M_train, nbasis=c(c1,c2,c3),sub = 25, ndb = ndb)
-    # E_ad=B2XZG(BB_ad$B,c=c(c2,c3)) # AQUÕ UTILIZO LA FUNCI”N B2XZG() PARA GENERAR LAS MATRICES NECESARIAS EN UN MODELO MIXTO
-    # res_ad=XZG2theta(E_ad$X, E_ad$Z, E_ad$G, E_ad$T, y_train) # AQUÕ AJUSTO EL MODELO MIXTO Y RECUPERO LOS COEFICIENTES ORIGINALES
+    # E_ad=B2XZG(BB_ad$B,c=c(c2,c3)) # AQU√ç UTILIZO LA FUNCI√ìN B2XZG() PARA GENERAR LAS MATRICES NECESARIAS EN UN MODELO MIXTO
+    # res_ad=XZG2theta(E_ad$X, E_ad$Z, E_ad$G, E_ad$T, y_train) # AQU√ç AJUSTO EL MODELO MIXTO Y RECUPERO LOS COEFICIENTES ORIGINALES
     
     # MODEL ESTIMATION USING GELLAR APPROACH
     fit_Gellar <- pfr(y_train ~ lf.vd(X_train,k=89))
@@ -218,7 +221,7 @@ for (iter_out in 1:case) { # HERE WE CAN SELECTED WHICH SCENARIO(S) SIMULATE
       Beta_h[j,1:M_it_train[iter,j,iter_out],iter]=as.vector(prod %*% res$theta) # HERE WE MULTIPLY THE BIDIMENSIONAL BASIS FOR THE COEFFICIENT
       
       # prod=as.matrix(kronecker(BB_ad$B_Phi[[j]]$B,t(BB_ad$B_T$B[j,])))
-      # Beta_h_ad[j,1:M_it_train[iter,j,iter_out],iter]=as.vector(prod %*% res_ad$theta) # AquÌ estamos multiplicando la base bidimesional por los theta
+      # Beta_h_ad[j,1:M_it_train[iter,j,iter_out],iter]=as.vector(prod %*% res_ad$theta) # Aqu√≠ estamos multiplicando la base bidimesional por los theta
       
       
       # HERE WE SELECT THE CORRECT INDEX FOR THE COEFFICIENT OF THE GELLAR AND GOLDSMITH APPROACHES 
@@ -307,7 +310,7 @@ for (iter_out in 1:case) { # HERE WE CAN SELECTED WHICH SCENARIO(S) SIMULATE
      for (j in 1:k) {
 
       ind=which(unique(M_it[iter,,iter_out])== M_it_test[iter,j,iter_out])
-      ind_t=max(M_it[iter,,iter_out]) # OJO AQUÕ ESTAMOS SUPONIENDO QUE LAS OBSERVACIONES SON CONSECUTIVAS DESDE 1:MAX(M)
+      ind_t=max(M_it[iter,,iter_out]) # OJO AQU√ç ESTAMOS SUPONIENDO QUE LAS OBSERVACIONES SON CONSECUTIVAS DESDE 1:MAX(M)
     
       Beta_refund=Beta_G[[iter]][(ind_t*(ind-1)+1):(ind*ind_t)]
       Beta_refund=Beta_refund[1:M_it_test[iter,j,iter_out]]
@@ -411,10 +414,10 @@ for (iter_out in 1:case) { # HERE WE CAN SELECTED WHICH SCENARIO(S) SIMULATE
 end=proc.time()
 time=end[1]-start[1]
 
-time/60/60
+time/60/60 # SIMULATION TIME IN HOURS
 
 
-################# BOXPLOTS
+################# BOXPLOTS 
 
 B_ERRORES_test=data.frame(B_ERROR_2_ellos_test,B_ERROR_2_te_ellos_test,B_ERROR_2_sop_test,B_ERROR_2_sop_ad_test) #B_ERROR_2,B_ERROR_2_te,
 
