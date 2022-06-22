@@ -1,9 +1,3 @@
-library(refund)
-library(fda)
-library(mgcv)
-library(SOP)
-library(expm)
-
 # ALL SIMULATED DATA AND RESULTS ARE FOUND IN https://drive.google.com/file/d/1P_VlMo4agsdR7MhE9p1THNcSKEqiqvpR/view?usp=sharing 
 # AND ARE READY PLOT
 
